@@ -1,22 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-    .example-wrapper {
-        margin: 1em auto;
-        max-width: 800px;
-        width: 95%;
-        font: 18px/1.5 sans-serif;
-    }
-
-    .example-wrapper code {
-        background: #F5F5F5;
-        padding: 2px 6px;
-    }
-</style>
 
 
     <h1 class="text-center">Blog</h1>
+
+    <a href="{{ path("blog_create")}}">Publier un article</a>
+
+
     <div class="d-flex row justify-content-center">
     {% for post in posts %}
         <div class="card border-info m-2 p-0" style="max-width: 18rem;">
@@ -31,5 +22,33 @@
             </div>
         </div>
     {% endfor %}
-    </div>   
+    </div>
+
+    <ul>
+    {% if page > 1 %}
+        <li>
+            <a href="{{path("home",{page:1})}}">Première page</a>
+        </li>
+    {% endif %}
+    {% if page > 1 %}
+        <li>
+            <a href="{{path("home",{page:page - 1})}}">Précédent</a>
+        </li>
+    {% endif %}
+    {% for p in range %}
+        <li>
+            <a href="{{path("home",{page:p})}}">{{p}}</a>
+        </li>
+    {% endfor %}
+    {% if page < pages %}
+        <li>
+            <a href="{{path("home",{page:page + 1})}}">Suivant</a>
+        </li>
+    {% endif %}
+    {% if page < pages %}
+        <li>
+            <a href="{{path("home",{page:pages})}}">Dernière page</a>
+        </li>
+    {% endif %}
+    </ul>   
 {% endblock %}

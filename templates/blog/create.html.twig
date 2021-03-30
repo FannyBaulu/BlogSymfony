@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center pb-2 border-bottom " style="color: #5bc0de;">Publier un nouvel article</h1>
+
+    
+    <div class="m-3 d-flex justify-content-center">
+        {{form_start(form)}}
+            {{form_row(form.title)}}
+            {{form_row(form.content)}}
+            <button type="submit" class="mt-2 btn btn-outline-primary">Publier</button>
+        {{form_end(form)}}
+    </div>
+    
+
+{% endblock %}
