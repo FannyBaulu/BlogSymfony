@@ -34,6 +34,12 @@ class Post
     private DateTimeImmutable $publishedAt;
 
     /**
+     * @var string|null
+     * @ORM\Column
+     */
+    private ?string $image = null;
+
+    /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      * @Assert\Length(min=10)
@@ -113,5 +119,25 @@ class Post
      */
     public function getComments(){
         return $this->comments;
+    }
+
+    /**
+     * Get the value of image
+     *
+     * @return  string|null
+     */ 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @param  string|null  $image
+     */ 
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
     }
 }
