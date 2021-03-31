@@ -6,10 +6,12 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
 use App\Form\PostType;
+use App\Uploader\UploaderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class BlogController extends AbstractController
 {
@@ -66,14 +68,25 @@ class BlogController extends AbstractController
     /**
      * @Route("/publier-article", name="blog_create")
      * @param Request $request
+     * @param UploaderInterface $uploader
      * @return Response
      * @throws Exception
      */
-    public function create(Request $request) : Response {
+    public function create(
+        Request $request,
+        UploaderInterface $uploader
+    ) : Response {
         $post = new Post;
 
-        $form = $this->createForm(PostType::class, $post)->handleRequest($request);
+        $form = $this->createForm(PostType::class, $post, [
+            "validation_groups"=> ["Default","create"]
+        ])->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
+            /** @var UploadedFile $file */
+            $file = $form->get("file")->getData();
+
+            $post->setImage($uploader->upload($file));
+
             $this->getDoctrine()->getManager()->persist($post);
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute("blog_read",["id" => $post->getId()]);
@@ -89,13 +102,25 @@ class BlogController extends AbstractController
      * @Route("/modifier-article/{id}", name="blog_update")
      * @param Request $request
      * @param Post $post
+     * @param UploaderInterface $uploader
      * @return Response
      * @throws Exception
      */
-    public function update(Request $request, Post $post) : Response {
+    public function update(
+        Request $request,
+        Post $post,
+        UploaderInterface $uploader
+    ) : Response {
         
         $form = $this->createForm(PostType::class, $post)->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
+            /** @var UploadedFile $file */
+            $file = $form->get("file")->getData();
+
+            if($file!== null){
+                $post->setImage($uploader->upload($file));
+            }
+            
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute("blog_read",["id" => $post->getId()]);
         }
