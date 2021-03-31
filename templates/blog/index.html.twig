@@ -5,7 +5,7 @@
 
     <h1 class="text-center">Blog</h1>
 
-    <a href="{{ path("blog_create")}}">Publier un article</a>
+    <a class="m-2 btn btn-outline-primary" href="{{ path("blog_create")}}">Publier un article</a>
 
 
     <div class="d-flex row justify-content-center">
@@ -24,31 +24,33 @@
     {% endfor %}
     </div>
 
-    <ul>
-    {% if page > 1 %}
-        <li>
-            <a href="{{path("home",{page:1})}}">Première page</a>
-        </li>
-    {% endif %}
-    {% if page > 1 %}
-        <li>
-            <a href="{{path("home",{page:page - 1})}}">Précédent</a>
-        </li>
-    {% endif %}
-    {% for p in range %}
-        <li>
-            <a href="{{path("home",{page:p})}}">{{p}}</a>
-        </li>
-    {% endfor %}
-    {% if page < pages %}
-        <li>
-            <a href="{{path("home",{page:page + 1})}}">Suivant</a>
-        </li>
-    {% endif %}
-    {% if page < pages %}
-        <li>
-            <a href="{{path("home",{page:pages})}}">Dernière page</a>
-        </li>
-    {% endif %}
-    </ul>   
+<nav aria-label="Page navigation example" class="mt-5">
+    <ul class="pagination justify-content-center">
+        {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{path("home",{page:1})}}">Première page</a>
+            </li>
+        {% endif %}
+        {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{path("home",{page:page - 1})}}">Précédent</a>
+            </li>
+        {% endif %}
+        {% for p in range %}
+            <li class="page-item">
+                <a class="page-link" href="{{path("home",{page:p})}}">{{p}}</a>
+            </li>
+        {% endfor %}
+        {% if page < pages %}
+            <li class="page-item">
+                <a class="page-link" href="{{path("home",{page:page + 1})}}">Suivant</a>
+            </li>
+        {% endif %}
+        {% if page < pages %}
+            <li class="page-item">
+                <a class="page-link" href="{{path("home",{page:pages})}}">Dernière page</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>   
 {% endblock %}

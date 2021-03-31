@@ -6,22 +6,32 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>{{post.title}}</h1>
+<div class="m-3">
 
-    <small>{{post.publishedAt|date("d/m/Y")}}</small>
-    <p>{{post.content}}</p>
+    <div class="m-2 d-flex justify-content-center">
+        <div class="row ">
+        <h1 class="text-center">{{post.title}}</h1>
+
+        <small class="text-center">{{post.publishedAt|date("d/m/Y")}}</small>
+        <p class="text-center">{{post.content}}</p>
+        </div>
+    </div>
 
     {{form_start(form)}}
         {{form_row(form.author)}}
         {{form_row(form.content)}}
-        <button type="submit" class="mt-2 btn btn-outline-primary">Envoyer</button>
+        <button type="submit" class="my-2 btn btn-outline-primary">Envoyer</button>
     {{form_end(form)}}
 
-    <ul>
     {% for comment in post.comments %}
-        <li>{{comment.author}} : {{comment.content}}</li>
+        <div class="d-flex border p-3 align-items-center mt-2">
+            <img class="flex-shrink-0 me-3 mt-3 rounded-circle" src="{{ asset('build/64x64.svg') }}" alt="Generic placeholder image">
+            <div class="ms-3 ">
+                <h5 class="mt-0">{{comment.author}}</h5>
+                {{comment.content}}
+            </div>
+        </div>
     {% endfor %}
-    </ul>
+
 </div>
 {% endblock %}
