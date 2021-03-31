@@ -12,6 +12,8 @@
         <div class="row ">
         <h1 class="text-center">{{post.title}}</h1>
 
+        <img src="{{asset(post.image)}}" class="mx-auto d-block" alt="{{post.title}}">
+
         <small class="text-center">{{post.publishedAt|date("d/m/Y")}}</small>
         <p class="text-center">{{post.content}}</p>
         </div>

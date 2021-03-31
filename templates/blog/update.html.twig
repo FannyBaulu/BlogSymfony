@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center pb-2 border-bottom " style="color: #5bc0de;">Modifier l'article : </h1>
+
+    {% include 'blog/_form.html.twig' with {form:form,buttonName: 'Modifier'} %}
+
+{% endblock %}
