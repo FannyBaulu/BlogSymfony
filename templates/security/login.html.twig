@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="m-3 d-flex justify-content-center">
+        {{form_start(form)}}
+            {{form_errors(form)}}
+            {{form_row(form.username)}}
+            {{form_row(form.password)}}
+            <button type="submit" class="mt-2 btn btn-outline-primary">Se connecter</button>
+        {{form_end(form)}}
+    </div>
+
+{% endblock %}
