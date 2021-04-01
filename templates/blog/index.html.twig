@@ -14,13 +14,17 @@
             <div class="card-header">{{post.title}}</div>
             <img src="{{asset(post.image)}}" class="card-img-top" alt="{{post.title}}">
             <div class="card-body">
-                <small class="card-title">{{post.publishedAt|date("d/m/Y")}}</small>
-                <div class="card-text">
-
+                <div class="card-title text-center small fst-italic">{{post.publishedAt|date("d/m/Y")}}</div>
+                <div class="card-text text-center">
                     <p>{{post.content}}</p>
                     <small>{{post.comments|length}} commentaire(s)</small>
                 </div>
-                <a href="{{path("blog_read",{id:post.id})}}">Lire la suite</a> | <a href="{{path("blog_update",{id:post.id})}}">Modifier</a>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a class="btn btn-outline-primary" href="{{path("blog_read",{id:post.id})}}">Lire la suite</a>
+                {% if is_granted('edit', post) %}
+                <a class="btn btn-outline-danger" href="{{path("blog_update",{id:post.id})}}">Modifier</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
@@ -39,7 +43,7 @@
             </li>
         {% endif %}
         {% for p in range %}
-            <li class="page-item">
+            <li class="page-item {{ page == p ? "active": ""}}">
                 <a class="page-link" href="{{path("home",{page:p})}}">{{p}}</a>
             </li>
         {% endfor %}
