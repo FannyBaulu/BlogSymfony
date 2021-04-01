@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -47,10 +48,17 @@ class Post
     private string $content;
 
     /**
+     * @var User $user
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private User $user;
+
+    /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
      */
     private $comments;
+
 
     public function __construct()
     {
@@ -114,10 +122,28 @@ class Post
         $this->content = $content;
     }
 
-     /**
-     * @return Collection
-     */
-    public function getComments(){
+
+    /**
+    * @return User
+    */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+    * @param User $user
+    */
+    public function setUser(User $user): void
+    {
+        $this->user= $user;
+    }
+
+    /**
+    * @return Collection
+    */
+    public function getComments(): Collection
+    {
         return $this->comments;
     }
 
