@@ -20,7 +20,9 @@
     </div>
 
     {{form_start(form)}}
+    {% if form.author is defined %}
         {{form_row(form.author)}}
+    {% endif %}
         {{form_row(form.content)}}
         <button type="submit" class="my-2 btn btn-outline-primary">Envoyer</button>
     {{form_end(form)}}
@@ -29,7 +31,7 @@
         <div class="d-flex border p-3 align-items-center mt-2">
             <img class="flex-shrink-0 me-3 mt-3 rounded-circle" src="{{ asset('build/64x64.svg') }}" alt="Generic placeholder image">
             <div class="ms-3 ">
-                <h5 class="mt-0">{{comment.author}}</h5>
+                <h5 class="mt-0">{{comment.user is not null ? comment.user.pseudo : comment.author}}</h5>
                 {{comment.content}}
             </div>
         </div>

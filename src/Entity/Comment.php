@@ -21,9 +21,10 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column
-     * @Assert\NotBlank
-     * @Assert\Length(min=2)
+     * @var string|null
+     * @ORM\Column(nullable=true)
+     * @Assert\NotBlank(groups={"anonymous"})
+     * @Assert\Length(min=2,groups={"anonymous"})
      */
     private string $author;
 
@@ -40,10 +41,15 @@ class Comment
     private DateTimeImmutable $postedAt;
 
     /**
-     * @var Post
-     * @ORM\ManyToOne(targetEntity="Post",inversedBy="comments")
-     */
+    * @var Post
+    * @ORM\ManyToOne(targetEntity="Post",inversedBy="comments")
+    */
     private $post;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="User")
+    */
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -67,9 +73,9 @@ class Comment
     }
 
     /**
-     * @param string $author
+     * @param string|null $author
      */ 
-    public function setAuthor(string $author):void
+    public function setAuthor(?string $author):void
     {
         $this->author = $author;
     }
@@ -122,4 +128,20 @@ class Comment
     }
 
    
+
+    /**
+     * @return User|null
+     */ 
+    public function getUser() : ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     *@param User|null $user
+     */ 
+    public function setUser($user):void
+    {
+        $this->user = $user;
+    }
 }
