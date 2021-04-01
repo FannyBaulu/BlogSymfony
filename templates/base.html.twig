@@ -33,9 +33,15 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{{path("security_logout")}}">Se déconnecter</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ path("blog_create")}}">Publier un article</a>
+                    </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{{path("security_login")}}">Se connecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{path("registration")}}">S'inscrire</a>
                     </li>
                     {% endif %}
                     
