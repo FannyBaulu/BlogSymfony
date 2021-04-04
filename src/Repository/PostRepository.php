@@ -26,8 +26,8 @@ class PostRepository extends ServiceEntityRepository
     public function getPaginatedPosts(int $page, int $limit): Paginator {
         return new Paginator (
         $this->createQueryBuilder("p")
-        ->addSelect("c")
-        ->join("p.comments","c")
+        // ->addSelect("c")
+        // ->join("p.comments","c")
         ->setMaxResults($limit)
         ->setFirstResult(($page-1)*$limit));
     }
