@@ -32,7 +32,7 @@
             <img class="flex-shrink-0 me-3 mt-3 rounded-circle" src="{{ asset('build/64x64.svg') }}" alt="Generic placeholder image">
             <div class="ms-3 ">
                 <h5 class="mt-0">{{comment.user is not null ? comment.user.pseudo : comment.author}}</h5>
-                {{comment.content}}
+                <h6>{{comment.content}}</h6>
             </div>
         </div>
     {% endfor %}
