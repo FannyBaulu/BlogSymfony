@@ -60,7 +60,7 @@ class WebAuthenticator extends AbstractFormLoginAuthenticator
         $credentials = new Credentials();
         $form = $this->formFactory->create(LoginType::class,$credentials)->handleRequest($request);
         if (!$form->isValid()){
-            return null;
+            throw new AuthenticationException('Email and/or password is not valid.');
         }
 
         return $credentials;
