@@ -1,11 +1,11 @@
 security:
     encoders:
-        App\Entity\User:
+        App\Application\Entity\User:
             algorithm: auto
     providers:
         users: 
             entity:
-                class: App\Entity\User
+                class: App\Application\Entity\User
                 property: email
     firewalls:
         dev:
@@ -21,7 +21,7 @@ security:
 
             guard:
                 authenticators:
-                    - App\Security\Guard\WebAuthenticator
+                    - App\Application\Security\Guard\WebAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
