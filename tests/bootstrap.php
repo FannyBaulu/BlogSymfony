@@ -1,5 +1,7 @@
 <?php
 
+// passthru("php bin/console c:c --env=test");
+
 use Symfony\Component\Dotenv\Dotenv;
 
 require dirname(__DIR__).'/vendor/autoload.php';

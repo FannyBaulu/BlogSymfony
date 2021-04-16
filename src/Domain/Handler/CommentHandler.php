@@ -22,7 +22,6 @@ class CommentHandler extends AbstractHandler
 
     protected function process($data): void
     {
-        
         $this->entityManager->persist($data);
         $this->entityManager->flush();
     }
