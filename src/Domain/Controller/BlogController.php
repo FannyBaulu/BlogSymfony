@@ -56,11 +56,12 @@ class BlogController extends AbstractController
         if($this->isGranted('ROLE_USER')){
             $comment->setUser($this->getUser());
         }
-
+        
         $options = [
             "validation_groups" => $this->isGranted("ROLE_USER") ? "Default":["Default","anonymous"]
         ];
-        if($commentHandler->handle($request, $comment,$options)){
+        
+        if($commentHandler->handle($request, $comment, $options)){
             return $this->redirectToRoute("blog_read",["id" => $post->getId()]);
         }
         return $this->render('blog/read.html.twig',[

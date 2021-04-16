@@ -24,7 +24,7 @@ abstract class AbstractHandler implements HandlerInterface
 
     public function handle(Request $request, $data, array $options = []): bool
     {
-        $this->form = $this->formFactory->create($this->getFormType(),$data)->handleRequest($request);
+        $this->form = $this->formFactory->create($this->getFormType(),$data, $options)->handleRequest($request);
 
         if ($this->form->isSubmitted()&&$this->form->isValid())
         {

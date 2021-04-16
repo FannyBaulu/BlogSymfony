@@ -29,6 +29,7 @@ class User implements UserInterface
      * @var string|null
      * @ORM\Column(unique=true)
      * @Assert\NotBlank
+     * @Assert\Email
      * @UniqueEmail
      */
     private ?string $email = null;
